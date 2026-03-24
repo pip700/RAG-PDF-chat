@@ -1,0 +1,23 @@
+# ═══════════════════════════════════════════════════════════
+# Multi-provider support with FREE defaults
+# ═══════════════════════════════════════════════════════════
+
+# UI
+streamlit
+
+# LangChain core
+langchain
+langchain-community
+
+# LLM Providers (install all, use one)
+langchain-groq
+langchain-google-genai
+langchain-openai
+
+# FREE Embeddings (no API key needed!)
+sentence-transformers
+
+# Utilities
+python-dotenv
+pypdf
+openpyxl

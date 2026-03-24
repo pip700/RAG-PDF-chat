@@ -1,0 +1,61 @@
+pdf_rag_agent/
+├── app.py                  # Main Streamlit application
+├── requirements.txt
+├── .env
+├── utils/
+│   ├── __init__.py
+│   ├── pdf_processor.py    # PDF loading, chunking, embedding
+│   ├── agent_builder.py    # Agent, tools, chains
+│   ├── extractors.py       # Structured extraction logic
+│   └── export_utils.py     # Export to JSON/CSV/Excel
+└── data/
+    └── (uploaded PDFs)
+
+
+###dockerfile
+docker build -t pdf-rag-agent .
+│
+├── 1. Pull ubuntu:22.04 base image
+│
+├── 2. Install system packages (wget, curl, bzip2, ca-certificates)
+│
+├── 3. Download Miniconda installer (~120MB)
+│       └── Install to /opt/conda
+│       └── Add conda to PATH
+│       └── Clean up installer
+│
+├── 4. Create conda environment "ragenv" with Python 3.12
+│
+├── 5. Copy requirements.txt
+│       └── pip install all packages inside ragenv
+│           ├── streamlit
+│           ├── langchain
+│           ├── langchain-openai
+│           ├── langgraph
+│           ├── pypdf
+│           ├── pydantic
+│           └── ...
+│
+├── 6. Verify installations (streamlit, langchain, langgraph)
+│
+├── 7. Copy application code (app.py, utils/, etc.)
+│
+├── 8. Create Streamlit config (/root/.streamlit/config.toml)
+│       └── server.address = 0.0.0.0
+│       └── server.port = 8501
+│       └── headless = true
+│
+├── 9. EXPOSE 8501
+│
+└── 10. Set ENTRYPOINT
+        └── conda run -n ragenv streamlit run app.py
+
+
+docker run -p 8501:8501 --env-file .env --name rag-app pdf-rag-agent
+│
+├── Container starts
+├── Conda activates "ragenv" environment
+├── Streamlit server starts on 0.0.0.0:8501
+├── Port 8501 forwarded from container → host
+│
+└── Access at http://localhost:8501
