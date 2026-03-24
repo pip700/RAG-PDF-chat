@@ -59,3 +59,24 @@ docker run -p 8501:8501 --env-file .env --name rag-app pdf-rag-agent
 ├── Port 8501 forwarded from container → host
 │
 └── Access at http://localhost:8501
+
+
+### ADD ".env" file:
+
+# Option 1: OpenAI (paid)
+# OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxx
+# Option 2: Groq (FREE) ✅ RECOMMENDED
+GROQ_API_KEY=gsk_xxxxxxxxxxxxxxxxxxxxx
+# Option 3: Google Gemini (FREE)
+# GOOGLE_API_KEY=AIxxxxxxxxxxxxxxxxxxxxx
+# Option 4: Ollama (FREE, local - no key needed)
+# OLLAMA_BASE_URL=http://host.docker.internal:11434
+
+### ADD ".dockerignore" file:
+.git
+__pycache__
+*.pyc
+.env.local
+.DS_Store
+*.md
+data/*.pdf
